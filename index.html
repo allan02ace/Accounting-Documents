@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIR Forms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d1b4c; --blue:#1442b8; --yellow:#f9c823; --cream:#faf8f3;
+    --grid:rgba(60,90,170,.10); --muted:#5b6275; --dot:#cfd3de;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{
+    font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif;color:var(--navy);
+    background:
+      radial-gradient(900px 520px at 100% 30%, rgba(249,200,35,.35), transparent 70%),
+      radial-gradient(700px 500px at 0% 40%, rgba(120,150,230,.16), transparent 70%),
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/60px 60px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/60px 60px,
+      var(--cream);
+    min-height:100vh;
+  }
+
+  header{height:80px;display:flex;align-items:center;padding:0 clamp(18px,8vw,260px);
+    border-bottom:1px solid rgba(60,90,170,.15);background:rgba(250,248,243,.75);backdrop-filter:blur(6px)}
+  .brand{font-weight:800;font-size:1.45rem;letter-spacing:-.02em}
+
+  main{max-width:980px;margin:0 auto;padding:clamp(48px,9vw,96px) 20px 80px;text-align:center}
+
+  h1{font-size:clamp(2.6rem,8vw,5rem);line-height:1.03;font-weight:800;letter-spacing:-.045em;margin:0}
+  h1 .mark{background:linear-gradient(transparent 80%, var(--yellow) 80%, var(--yellow) 96%, transparent 96%)}
+
+  #sections{margin-top:clamp(40px,7vw,72px)}
+
+  /* Card, modeled on the 2307 preview card */
+  .card{max-width:620px;margin:0 auto 28px;text-align:left;background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(13,27,76,.35),0 2px 6px rgba(13,27,76,.08)}
+  .card-head{background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.95rem}
+  .badge{background:var(--yellow);color:var(--navy);border-radius:5px;padding:3px 9px;font-size:.78rem;font-weight:700}
+
+  .row{display:flex;align-items:center;gap:16px;padding:18px 20px;text-decoration:none;color:inherit;
+    border-top:1px dotted var(--dot)}
+  .row:first-of-type{border-top:0}
+  .row:hover{background:#f6f8ff}
+  .row:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px}
+  .code{flex:none;min-width:70px;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--blue);font-size:1rem}
+  .info{flex:1;min-width:0}
+  .name{font-weight:700;font-size:1rem}
+  .meta{font-family:"JetBrains Mono",monospace;font-size:.76rem;color:var(--muted);margin-top:3px}
+  .get{flex:none;display:inline-flex;align-items:center;gap:7px;background:var(--yellow);color:var(--navy);
+    font-weight:700;font-size:.88rem;padding:10px 16px;border-radius:9px}
+  .row:hover .get{filter:brightness(.96)}
+  .empty{padding:20px;color:var(--muted);font-size:.92rem}
+
+  @media (max-width:520px){
+    .row{flex-wrap:wrap}
+    .get{margin-left:86px}
+  }
+</style>
+</head>
+<body>
+
+<header><span class="brand">BIR Documents</span></header>
+
+<main>
+  <h1>BIR <span class="mark">FORMS</span></h1>
+  <div id="sections"></div>
+</main>
+
+<script>
+/* ============================================================
+   EDIT HERE: add sections and forms.
+   - Put the files in the "templates" folder of your GitHub repo.
+   - "file" must match the file name in that folder exactly.
+   - To add a new section (like ATP), copy one { title, forms } block.
+   ============================================================ */
+const FOLDER = "templates/";
+const SECTIONS = [
+  { title: "ATP", forms: [
+    { code: "S1905", name: "Registration Update Sheet",
+      note: "RMC No. 122-2022, August 2022",
+      file: "RMC_No__122-2022_S1905-RUS_Template_.pdf" },
+    { code: "1906", name: "Application for Authority to Print Invoices",
+      note: "Fillable, January 2024 (ENCS)",
+      file: "1906_FILLABLE.pdf" },
+    { code: "1906", name: "Application for Authority to Print Invoices (Bankers)",
+      note: "Fillable, Bankers pre-filled as accredited printer",
+      file: "1906_FILLABLE_with_Bankers.pdf" },
+    { code: "SPA", name: "Special Power of Attorney for ATP",
+      note: "Word document",
+      file: "SPA_For_ATP.docx" },
+    { code: "Invoice", name: "Invoice Template",
+      note: "Excel spreadsheet",
+      file: "Invoice_Template.xlsx" },
+    { code: "Samples", name: "List of Sample Invoices",
+      note: "VAT, Non-VAT, VAT-Exempt, Zero-rated, Mixed, Payment Receipt",
+      file: "BIR_SAMPLE_INVOICES.pdf" },
+    { code: "CDR", name: "Checklist of Documentary Requirements",
+      note: "F1101 to F1105C, January 2024",
+      file: "Checklist.pdf" },
+    { code: "RMC 77", name: "Clarification on the Invoicing Requirements (RR 7-2024, as amended by RR 11-2024)",
+      note: "RMC No. 77-2024, July 11, 2024",
+      file: "RMC_No__77-2024.pdf" },
+  ]},
+  { title: "2316", forms: [
+    { code: "Annex C", name: "2316 Annex C", note: "Word document", file: "2316_Annex_C.docx" },
+    { code: "Annex F", name: "2316 Annex F", note: "Word document", file: "2316_Annex_F.docx" },
+    { code: "CD Cover", name: "2316 CD Cover", note: "Word document", file: "2316_CD_Cover.docx" },
+  ]},
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 16 6 10h4V3h4v7h4zm-8 3h16v2H4z"/></svg>';
+
+document.getElementById("sections").innerHTML = SECTIONS.map(s => `
+  <section class="card" aria-label="${esc(s.title)}">
+    <div class="card-head"><span>${esc(s.title)}</span><span class="badge">${s.forms.length} ${s.forms.length === 1 ? "form" : "forms"}</span></div>
+    ${s.forms.length ? s.forms.map(f => `
+      <a class="row" href="${FOLDER}${encodeURIComponent(f.file)}" download>
+        <span class="code">${esc(f.code)}</span>
+        <span class="info"><div class="name">${esc(f.name)}</div>${f.note ? `<div class="meta">${esc(f.note)}</div>` : ""}</span>
+        <span class="get">${DL}Download</span>
+      </a>`).join("") : '<div class="empty">No forms yet.</div>'}
+  </section>`).join("");
+</script>
+</body>
+</html>
